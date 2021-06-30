@@ -58,9 +58,9 @@ const Form = ({ formId, onSubmit }) => {
 
         const values = {
             diceNumberOfFaces: trueDiceFaceNumber,
-            diceNumber: diceNumber,
-            numberOfSuccess: numberOfSuccess,
-            diceMinValue: diceMinValue
+            diceNumber: parseInt(diceNumber),
+            numberOfSuccess: parseInt(numberOfSuccess),
+            diceMinValue: parseInt(diceMinValue)
         }
 
         if (!trueDiceFaceNumber) {
@@ -102,7 +102,7 @@ const Form = ({ formId, onSubmit }) => {
                     <TextField
                         required={diceValue === '?'}
                         id="diceFaceNumber"
-                        label="Nombre de face sur le dé"
+                        label="Nombre de faces sur le dé"
                         defaultValue={diceValue === '?' ? diceFaceNumber : ''}
                         onChange={handleOnChangeDiceFaceNumber}
                         type='number'
@@ -122,7 +122,7 @@ const Form = ({ formId, onSubmit }) => {
                     <TextField
                         required
                         id="diceNumber"
-                        label="Nombre de dés"
+                        label="Nombre de dés à lancer"
                         defaultValue={diceNumber}
                         onChange={handleOnChangeDiceNumber}
                         type='number'
@@ -135,7 +135,7 @@ const Form = ({ formId, onSubmit }) => {
                     <TextField
                         required
                         id="numberOfSuccess"
-                        label="Nombre de succès"
+                        label="Nombre de succès requis"
                         defaultValue={numberOfSuccess}
                         onChange={handleOnChangeNumberOfSuccess}
                         type='number'
@@ -148,7 +148,7 @@ const Form = ({ formId, onSubmit }) => {
                     <TextField
                         required
                         id="diceMinValue"
-                        label="Valeur minimale à faire"
+                        label="Face minimale à faire sur le dé"
                         defaultValue={diceMinValue}
                         onChange={handleOnChangeDiceMinValue}
                         type='number'

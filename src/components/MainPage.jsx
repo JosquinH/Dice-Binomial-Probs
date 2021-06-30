@@ -1,12 +1,15 @@
 import { Box, Button, Container, Paper } from '@material-ui/core'
-import React from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Calculator } from 'mdi-material-ui'
+import { computeProbs } from './utils'
 import Form from './Form'
+import ResultComponent from './ResultComponent'
+
 const useStyles = makeStyles((theme) => ({
     container: {
         display: 'flex',
-        justifyContent:'center',
+        justifyContent: 'center',
         alignItems: 'center',
         flex: 1,
         marginTop: '5%',
@@ -19,25 +22,41 @@ const useStyles = makeStyles((theme) => ({
     },
     paper: {
         display: 'flex',
-        flexDirection:'column',
+        flexDirection: 'column',
         alignItems: 'center'
     },
     topBox: {
         display: 'flex',
-        justifyContent:'center',
+        justifyContent: 'center',
         alignItems: 'center',
-        flexDirection:'column'
+        flexDirection: 'column'
     }
 }))
+
+const computeFormValues = ({ values }) => {
+    return new Promise((resolve) => {
+        const res = computeProbs({...values})
+        resolve(res)
+    })
+}
 
 const MainPage = (props) => {
     const classes = useStyles()
     const formId = 'computed-values-form'
+    const [loading, setLoading] = useState(false)
+    const [probsData, setProbsData] = useState(null)
 
     const handleOnSubmit = (values) => {
-        alert(JSON.stringify(values))
+        setLoading(true)
+        computeFormValues({values}).then(
+            (res) => {
+                setProbsData(res)
+                setLoading(false)
+            }
+        )
     }
 
+    console.log(probsData)
     return (
         <Box className={classes.topBox}>
             <Container maxWidth='md' className={classes.container} >
@@ -62,11 +81,11 @@ const MainPage = (props) => {
 
             <Container maxWidth='md' className={classes.container} >
                 <Paper className={classes.paper}>
-                    <div>cocucoco</div>
+                    <ResultComponent loading={loading} data={probsData} />
                 </Paper>
             </Container>
         </Box>
-        
+
     )
 }
 
