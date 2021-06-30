@@ -50,6 +50,7 @@ const Form = ({ formId, onSubmit }) => {
         setDiceMinValue(e.target.value)
     }
 
+    const [diceError, setDiceError] = useState(false)
     
     const handleOnSubmit = (e) => {
         e.preventDefault()
@@ -61,7 +62,13 @@ const Form = ({ formId, onSubmit }) => {
             numberOfSuccess: numberOfSuccess,
             diceMinValue: diceMinValue
         }
-        onSubmit(values)
+
+        if (!trueDiceFaceNumber) {
+            setDiceError(true)
+        } else {
+            onSubmit(values)
+        }
+        
     }
 
     return (
@@ -104,6 +111,9 @@ const Form = ({ formId, onSubmit }) => {
                         inputProps={{ min: 2 }}
                         disabled={diceValue !== '?'}
                     />
+                </Grid>
+                <Grid item xs={12}>
+                    {diceError ? <Typography variant='body2' color='secondary'> Veuillez sélectionnner un dé </Typography> : null}
                 </Grid>
                 <Grid item xs={12}>
                     <Typography variant='h6' type='bold'> Informations suplémentaires </Typography>
