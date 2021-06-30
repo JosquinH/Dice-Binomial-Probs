@@ -12,12 +12,13 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
         alignItems: 'center',
         flex: 1,
-        marginTop: '5%',
-        marginBottom: '5%'
+        marginTop: '3%',
+        marginBottom: '3%'
     },
     box: {
-        margin: '2%',
-        marginBottom: "20px",
+        marginBottom: '2%',
+        marginLeft: '2%',
+        marginRight: '2%',
         flex: 5
     },
     paper: {
@@ -29,13 +30,14 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        backgroundColor: '#D3D3D3',
     }
 }))
 
 const computeFormValues = ({ values }) => {
     return new Promise((resolve) => {
-        const res = computeProbs({...values})
+        const res = computeProbs({ ...values })
         resolve(res)
     })
 }
@@ -48,7 +50,7 @@ const MainPage = (props) => {
 
     const handleOnSubmit = (values) => {
         setLoading(true)
-        computeFormValues({values}).then(
+        computeFormValues({ values }).then(
             (res) => {
                 setProbsData(res)
                 setLoading(false)
@@ -56,12 +58,11 @@ const MainPage = (props) => {
         )
     }
 
-    console.log(probsData)
     return (
         <Box className={classes.topBox}>
             <Container maxWidth='md' className={classes.container} >
                 <Paper className={classes.paper}>
-                    <Box className={classes.box}>
+                    <Box className={classes.box} style={{ marginTop: '2%' }}>
                         <Form formId={formId} onSubmit={handleOnSubmit} />
                     </Box>
                     <Box style={{ flex: 1 }} className={classes.box}>
