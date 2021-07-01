@@ -98,7 +98,7 @@ const ResultComponent = (props) => {
                             }}
                             legendToggle
                         />
-                    </div> : null
+                    </div> : <div style={{ height: height, width: width }}></div>
 
                 }
             </Box>

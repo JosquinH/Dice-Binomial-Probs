@@ -1,3 +1,4 @@
+
 /**
  * Calcul des probabilités de succès. Elles sont calculé avec une loi binomial dont les chances de succès sont  1 - diceMinValue/diceNumberOfFaces
  * Le nombre d'épreuve (n) est diceNumber et le nombre de succès (k) est numberOfSuccess
@@ -27,6 +28,8 @@ export const computeProbs = ({ diceNumberOfFaces, diceNumber, numberOfSuccess, d
 
     for (let k = 0; k <= diceNumber; ++k) {
 
+        if (k === diceNumber) cur_PE = 1
+
         const curProb = curBinomialCoefficient * cur_PS * cur_PE
         
         table_single_probs.push(curProb)
@@ -42,13 +45,6 @@ export const computeProbs = ({ diceNumberOfFaces, diceNumber, numberOfSuccess, d
         curBinomialCoefficient *= curN / (k + 1)
 
         --curN
-    }
-
-    // Cas extrème si le succès est certain
-    
-    if (pE === 0) {
-        table_single_probs[diceNumber] = 1
-        res = 1
     }
 
     return ({
