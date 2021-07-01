@@ -50,6 +50,9 @@ const ResultComponent = (props) => {
     const dataChart1 = data?.table_single_probs ? [['Nombre de Succès', 'Probabilité (%)'], ...data.table_single_probs.map((x, idx) => [`${idx} succès`, Math.round(x * 10000) / 100])] : []
     const dataChart2 = data?.table_decrement_probs ? [['Nombre de Succès Au Moins', 'Probabilité (%)'], ...data.table_decrement_probs.map((x, idx) => [`${idx} succès au moins`, Math.round(x * 10000) / 100])] : []
 
+    const height = 300
+    const width = 700
+
     return (
         <Box className={classes.topBox}>
             <Box className={classes.box} style={{ marginTop: '2%' }}>
@@ -60,13 +63,13 @@ const ResultComponent = (props) => {
                     <div style={{ display: 'flex' }}>
                         <Chart
                             width={700}
-                            height={300}
+                            height={height}
                             chartType="ColumnChart"
                             loader={<CircularProgress />}
                             data={dataChart1}
                             options={{
                                 title: 'Probabilité sur le nombre de succès (%)',
-                                chartArea: { width: '30%' },
+                                chartArea: { width: '70%' },
                                 hAxis: {
                                     title: 'Nombre de succès',
                                     minValue: 0,
@@ -74,7 +77,7 @@ const ResultComponent = (props) => {
                                 }
                             }}
                             legendToggle
-                        /></div> : null
+                        /></div> : <div style={{ height: height, width: width }}></div>
                 }
                 {dataChart2.length >= 2 ?
                     <div style={{ display: 'flex' }}>
@@ -86,7 +89,7 @@ const ResultComponent = (props) => {
                             data={dataChart2}
                             options={{
                                 title: 'Probabilité sur le nombre de succès au moins (%)',
-                                chartArea: { width: '30%' },
+                                chartArea: { width: '70%' },
                                 hAxis: {
                                     title: 'Nombre de succès au moins',
                                     minValue: 0,

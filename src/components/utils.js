@@ -10,7 +10,7 @@
 
 
 export const computeProbs = ({ diceNumberOfFaces, diceNumber, numberOfSuccess, diceMinValue }) => {
-    const pE = diceMinValue / diceNumberOfFaces // probabilité d'échec
+    const pE = (diceMinValue - 1) / diceNumberOfFaces // probabilité d'échec
     const pS = 1 - pE // probabilité de succès
 
     let cur_PE = Math.pow(pE, diceNumber)
@@ -37,13 +37,19 @@ export const computeProbs = ({ diceNumberOfFaces, diceNumber, numberOfSuccess, d
         }
 
         cur_PS = cur_PS * pS
-        cur_PE = cur_PE / pE
+        cur_PE = pE === 0 ? 0 : cur_PE / pE
         probs_decrement -= curProb
         curBinomialCoefficient *= curN / (k + 1)
 
         --curN
     }
 
+    // Cas extrème si le succès est certain
+    
+    if (pE === 0) {
+        table_single_probs[diceNumber] = 1
+        res = 1
+    }
 
     return ({
         res,
