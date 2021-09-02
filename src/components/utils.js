@@ -1,6 +1,6 @@
 
 /**
- * Calcul des probabilités de succès. Elles sont calculé avec une loi binomial dont les chances de succès sont  1 - diceMinValue/diceNumberOfFaces
+ * Calcul des probabilités de succès. Elles sont calculé avec une loi binomial dont les chances de succès sont  1 - (diceMinValue -1)/diceNumberOfFaces
  * Le nombre d'épreuve (n) est diceNumber et le nombre de succès (k) est numberOfSuccess
  * Comme on ne cherche pas P(X=k) mais P(X>=k), il faudra calculé les P(X=x) pour x allant de k à n
  * 
