@@ -1,6 +1,8 @@
 # Dice-Binomial-Probs
 
 Une application react pour calculer des chances de succès en dé du type : si je lance 4d10 qu'elle sont les chances que au moins 2 soit supérieurs ou égals à 7
+
+# Lien de l'application
 Vous pouvez tester mon application en cliquant [ici](https://dice-binomial-probs.vercel.app/).
 
 # Getting Started with Create React App
